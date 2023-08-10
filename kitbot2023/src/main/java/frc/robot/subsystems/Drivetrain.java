@@ -36,6 +36,7 @@ public class Drivetrain extends SubsystemBase {
   private DifferentialDriveOdometry odometry;
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveWheelSpeeds wheelSpeeds;
+  private final boolean isPowerMode = true;
   
   private double kP = 0.15 * 0.75;
   private double kI = 0.002 * 0;
@@ -43,7 +44,7 @@ public class Drivetrain extends SubsystemBase {
   private double kF = 0.052;
 
   /** Creates a new Drivetrain. */
-  public Drivetrain(IMU imu) {
+  public Drivetrain() {
     drivetrainTable = NetworkTableInstance.getDefault().getTable("Drivetrain");
     pEntry = drivetrainTable.getEntry("kP");
     iEntry = drivetrainTable.getEntry("kI");
@@ -62,15 +63,25 @@ public class Drivetrain extends SubsystemBase {
     leftMotorFollower = new CANSparkMax(50, MotorType.kBrushed);
     rightMotorLeader = new CANSparkMax(31, MotorType.kBrushed);
     rightMotorLeader = new CANSparkMax(27, MotorType.kBrushed);
-
-
-
+    leftMotorLeader.restoreFactoryDefaults();
+    rightMotorLeader.restoreFactoryDefaults();
+    leftMotorFollower.follow(leftMotorLeader);
+    rightMotorFollower.follow(rightMotorLeader);
 
   }
 
   @Override
   public void periodic() {
+
     // This method will be called once per scheduler run
+  }
+
+  public void setPower(double leftPower, double rightPower)
+  {
+    if(isPowerMode){
+      leftMotorLeader.set(leftPower);
+      rightMotorLeader.set(rightPower);
+    }
   }
 }
 

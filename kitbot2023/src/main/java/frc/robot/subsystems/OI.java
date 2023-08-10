@@ -16,7 +16,6 @@ public class OI extends SubsystemBase
 
     public Joystick driverController;
     public Joystick operatorController;
-    private boolean isCubeMode;
 
     public Debouncer parkingBrakeDebouncer = new Debouncer(0.05);
     public Debouncer xDriverButtonDebouncer = new Debouncer(0.05);
@@ -49,10 +48,6 @@ public class OI extends SubsystemBase
         RIGHT_Y_ZERO = 0;
          zeroDriverController();
          zeroOperatorController();
-         //isCube = new BooleanSupplier() {
-           // return isCubeMode;
-         //};
-        isCubeMode = true;
     }
 
     public static void initPreferences() 
@@ -71,7 +66,7 @@ public class OI extends SubsystemBase
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-        SmartDashboard.putBoolean("OI/isCubeMode", isCubeMode);
+        
     }
 
     //------- Driver Controller Joysticks Below
@@ -94,17 +89,6 @@ public class OI extends SubsystemBase
         RIGHT_Y_ZERO = getDriverRightY();
     }
 
-    public boolean isCubeMode() {
-        return isCubeMode;
-    }
-
-    public void setCubeMode(){
-        isCubeMode = true;
-    }
-    
-    public void setConeMode(){
-        isCubeMode = false;
-    }
 
     private final double LEFT_X_MIN = -1;
     private final double LEFT_X_MAX = 1;
