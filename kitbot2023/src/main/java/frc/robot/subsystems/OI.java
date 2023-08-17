@@ -139,7 +139,7 @@ public class OI extends SubsystemBase
     private final double OPERATOR_LEFT_X_MIN = -1;
     private final double OPERATOR_LEFT_X_MAX = 1;
     private double OPERATOR_LEFT_X_ZERO = 0;
-    public double getOperatorLeftX() {
+    public static double getOperatorLeftX() {
         double value = MathUtil.clamp(2.0 * (operatorController.getRawAxis(0) - (OPERATOR_LEFT_X_MAX + OPERATOR_LEFT_X_MIN) * 0.5) / (OPERATOR_LEFT_X_MAX - OPERATOR_LEFT_X_MIN) - OPERATOR_LEFT_X_ZERO, -1, 1);
         if(Math.abs(value) < .35){value = 0;} //sets deadzone equal to .35
         return value;
