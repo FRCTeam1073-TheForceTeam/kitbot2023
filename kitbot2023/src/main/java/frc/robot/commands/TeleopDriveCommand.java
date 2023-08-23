@@ -6,10 +6,7 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import frc.robot.subsystems.OI;
-import edu.wpi.first.math.kinematics.ChassisSpeeds;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class TeleopDriveCommand extends CommandBase {
   private Drivetrain m_drivetrain;
@@ -19,6 +16,7 @@ public class TeleopDriveCommand extends CommandBase {
   public TeleopDriveCommand(Drivetrain drivetrain) {
 
     // Use addRequirements() here to declare subsystem dependencies.
+    addRequirements(m_drivetrain);
 
   }
 
@@ -29,13 +27,15 @@ public class TeleopDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_OI.getOperatorLeftX(), m_OI.getOperatorLeftY());
+    m_drivetrain.drive(m_OI.getDriverLeftX(), m_OI.getDriverLeftY());
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    m_drivetrain.drive(0, 0);
+  }
 
   // Returns true when the command should end.
   @Override

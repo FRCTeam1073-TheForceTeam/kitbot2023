@@ -65,10 +65,10 @@ public class Drivetrain extends SubsystemBase {
     dEntry.setDouble(kD);
     fEntry.setDouble(kF);
 
-    leftMotorLeader = new CANSparkMax(30, MotorType.kBrushed);
-    leftMotorFollower = new CANSparkMax(50, MotorType.kBrushed);
-    rightMotorLeader = new CANSparkMax(31, MotorType.kBrushed);
-    rightMotorFollower = new CANSparkMax(27, MotorType.kBrushed);
+    leftMotorLeader = new CANSparkMax(0, MotorType.kBrushed);
+    leftMotorFollower = new CANSparkMax(1, MotorType.kBrushed);
+    rightMotorLeader = new CANSparkMax(2, MotorType.kBrushed);
+    rightMotorFollower = new CANSparkMax(3, MotorType.kBrushed);
     leftMotorLeader.restoreFactoryDefaults();
     rightMotorLeader.restoreFactoryDefaults();
     leftMotorFollower.follow(leftMotorLeader);
