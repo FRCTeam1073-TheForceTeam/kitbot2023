@@ -4,11 +4,9 @@
 
 package frc.robot.subsystems;
 
-import com.revrobotics.CANSparkMax;
 /*to get import for Rev hardware use this json file: 
 https://software-metadata.revrobotics.com/REVLib-2023.json
 WPI button -> manage vendor libraries -> install new library (online) */
-import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
@@ -18,6 +16,8 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.motorcontrol.Spark;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
@@ -31,18 +31,15 @@ public class Drivetrain extends SubsystemBase {
   NetworkTableEntry fEntry;
   NetworkTableEntry updateButton;
  
-  private CANSparkMax leftMotorLeader;
-  private CANSparkMax leftMotorFollower;
-  private CANSparkMax rightMotorLeader;
-  private CANSparkMax rightMotorFollower;
+  private Spark leftMotorLeader;
+  private Spark leftMotorFollower;
+  private Spark rightMotorLeader;
+  private Spark rightMotorFollower;
 
   private DifferentialDriveOdometry odometry;
   private DifferentialDriveKinematics kinematics;
   private DifferentialDriveWheelSpeeds wheelSpeeds;
   private DifferentialDrive drivetrain;
-  
-  
-  private final boolean isPowerMode = false;
   
   private double kP = 0.15 * 0.75;
   private double kI = 0.002 * 0;
@@ -65,14 +62,13 @@ public class Drivetrain extends SubsystemBase {
     dEntry.setDouble(kD);
     fEntry.setDouble(kF);
 
-    leftMotorLeader = new CANSparkMax(0, MotorType.kBrushed);
-    leftMotorFollower = new CANSparkMax(1, MotorType.kBrushed);
-    rightMotorLeader = new CANSparkMax(2, MotorType.kBrushed);
-    rightMotorFollower = new CANSparkMax(3, MotorType.kBrushed);
-    leftMotorLeader.restoreFactoryDefaults();
-    rightMotorLeader.restoreFactoryDefaults();
-    leftMotorFollower.follow(leftMotorLeader);
-    rightMotorFollower.follow(rightMotorLeader);
+
+    leftMotorLeader = new Spark(4);
+    leftMotorFollower = new Spark(1);
+    rightMotorLeader = new Spark(2);
+    rightMotorFollower = new Spark(3);
+    // leftMotorFollower.follow(leftMotorLeader);
+    // rightMotorFollower.follow(rightMotorLeader);
 
     drivetrain = new DifferentialDrive(leftMotorLeader, rightMotorLeader);
   }
@@ -85,14 +81,13 @@ public class Drivetrain extends SubsystemBase {
 
   public void setPower(double leftPower, double rightPower)
   {
-    if(!isPowerMode){
-      leftMotorLeader.set(leftPower);
-      rightMotorLeader.set(rightPower);
-    }
+    leftMotorLeader.set(leftPower);
+    rightMotorLeader.set(rightPower);
+    SmartDashboard.putNumber("Right Power", rightPower);
+    SmartDashboard.putNumber("Left Power", leftPower);
   }
 
-  public void drive(double x, double y){
-    drivetrain.tankDrive(x, y);
+  public void drive(double left, double right){
+    drivetrain.tankDrive(left, right);
   }
 }
-

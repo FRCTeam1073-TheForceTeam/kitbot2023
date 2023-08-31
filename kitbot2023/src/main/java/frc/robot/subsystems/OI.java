@@ -42,6 +42,8 @@ public class OI extends SubsystemBase {
       // This method will be called once per scheduler run
       SmartDashboard.putBoolean("Button 1", getRawButton(1));
       SmartDashboard.putBoolean("Button 2", getRawButton(2));
+      SmartDashboard.putNumber("Right Y", getDriverRightY());
+      SmartDashboard.putNumber("Left Y", getDriverLeftY());
   }
 
   public void zeroDriverController() {

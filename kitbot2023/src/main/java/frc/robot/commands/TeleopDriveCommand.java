@@ -13,9 +13,11 @@ public class TeleopDriveCommand extends CommandBase {
   private OI m_OI;
 
   /** Creates a new TeleopDriveCommand. */
-  public TeleopDriveCommand(Drivetrain drivetrain) {
+  public TeleopDriveCommand(Drivetrain drivetrain, OI m_oi) {
 
     // Use addRequirements() here to declare subsystem dependencies.
+    m_drivetrain = drivetrain;
+    m_OI = m_oi;
     addRequirements(m_drivetrain);
 
   }
@@ -27,7 +29,7 @@ public class TeleopDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_OI.getDriverLeftX(), m_OI.getDriverLeftY());
+    m_drivetrain.drive(m_OI.getDriverLeftY(), m_OI.getDriverRightY());
 
   }
 
