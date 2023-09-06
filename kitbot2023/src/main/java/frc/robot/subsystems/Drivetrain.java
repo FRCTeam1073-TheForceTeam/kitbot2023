@@ -8,14 +8,10 @@ package frc.robot.subsystems;
 https://software-metadata.revrobotics.com/REVLib-2023.json
 WPI button -> manage vendor libraries -> install new library (online) */
 
-import edu.wpi.first.math.kinematics.DifferentialDriveKinematics;
-import edu.wpi.first.math.kinematics.DifferentialDriveOdometry;
-import edu.wpi.first.math.kinematics.DifferentialDriveWheelSpeeds;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.Spark;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -35,11 +31,6 @@ public class Drivetrain extends SubsystemBase {
   private Spark leftMotorFollower;
   private Spark rightMotorLeader;
   private Spark rightMotorFollower;
-
-  private DifferentialDriveOdometry odometry;
-  private DifferentialDriveKinematics kinematics;
-  private DifferentialDriveWheelSpeeds wheelSpeeds;
-  private DifferentialDrive drivetrain;
   
   private double kP = 0.15 * 0.75;
   private double kI = 0.002 * 0;
@@ -69,8 +60,6 @@ public class Drivetrain extends SubsystemBase {
     rightMotorFollower = new Spark(3);
     // leftMotorFollower.follow(leftMotorLeader);
     // rightMotorFollower.follow(rightMotorLeader);
-
-    drivetrain = new DifferentialDrive(leftMotorLeader, rightMotorLeader);
   }
 
   @Override
@@ -82,12 +71,14 @@ public class Drivetrain extends SubsystemBase {
   public void setPower(double leftPower, double rightPower)
   {
     leftMotorLeader.set(leftPower);
+    leftMotorFollower.set(leftPower);
     rightMotorLeader.set(rightPower);
+    rightMotorFollower.set(rightPower);
     SmartDashboard.putNumber("Right Power", rightPower);
     SmartDashboard.putNumber("Left Power", leftPower);
   }
 
-  public void drive(double left, double right){
-    drivetrain.tankDrive(left, right);
-  }
+  // public void drive(double left, double right){
+  //   drivetrain.tankDrive(left, right);
+  // }
 }

@@ -29,14 +29,14 @@ public class TeleopDriveCommand extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.drive(m_OI.getDriverLeftY(), m_OI.getDriverRightY());
+    m_drivetrain.setPower(m_OI.getDriverLeftY(), m_OI.getDriverRightY());
 
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drivetrain.drive(0, 0);
+    m_drivetrain.setPower(0, 0);
   }
 
   // Returns true when the command should end.
