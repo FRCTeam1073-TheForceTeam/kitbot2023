@@ -54,26 +54,25 @@ public class Drivetrain extends SubsystemBase {
     fEntry.setDouble(kF);
 
 
-    leftMotorLeader = new Spark(4);
-    leftMotorFollower = new Spark(1);
-    rightMotorLeader = new Spark(2);
-    rightMotorFollower = new Spark(3);
+    rightMotorLeader = new Spark(0);
+    rightMotorFollower = new Spark(1);
+    leftMotorLeader = new Spark(2);
+    leftMotorFollower = new Spark(3);
     // leftMotorFollower.follow(leftMotorLeader);
     // rightMotorFollower.follow(rightMotorLeader);
   }
 
   @Override
   public void periodic() {
-
     // This method will be called once per scheduler run
   }
 
   public void setPower(double leftPower, double rightPower)
   {
-    leftMotorLeader.set(leftPower);
-    leftMotorFollower.set(leftPower);
-    rightMotorLeader.set(rightPower);
-    rightMotorFollower.set(rightPower);
+    leftMotorLeader.set(-leftPower*.5);
+    leftMotorFollower.set(-leftPower*.5);
+    rightMotorLeader.set(rightPower*.5);
+    rightMotorFollower.set(rightPower*5);
     SmartDashboard.putNumber("Right Power", rightPower);
     SmartDashboard.putNumber("Left Power", leftPower);
   }

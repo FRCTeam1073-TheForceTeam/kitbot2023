@@ -30,7 +30,6 @@ public class TeleopDriveCommand extends CommandBase {
   @Override
   public void execute() {
     m_drivetrain.setPower(m_OI.getDriverLeftY(), m_OI.getDriverRightY());
-
   }
 
   // Called once the command ends or is interrupted.
