@@ -26,7 +26,7 @@ public class OI extends SubsystemBase {
     zeroDriverController();
   }
 
-  /** This method will be called once per scheduler run **/
+  /** This method will be called once per scheduler run */
   @Override
   public void periodic() {
     // Prints our joystick values on SmartDashboard for debugging
@@ -50,7 +50,7 @@ public class OI extends SubsystemBase {
     RIGHT_Y_ZERO = getDriverRightY();
   }
 
-  /** The following methods return quality-controlled values from the driver controller **/
+  /** The following methods return quality-controlled values from the driver controller */
   public double getDriverLeftX() {
     // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
     return MathUtil.clamp(driverController.getRawAxis(0) - LEFT_X_ZERO, -1, 1);
@@ -68,7 +68,7 @@ public class OI extends SubsystemBase {
     return MathUtil.clamp(driverController.getRawAxis(5) - RIGHT_Y_ZERO, -1, 1);
   }
 
-  /** Returns a specified button from the driver controller **/
+  /** Returns a specified button from the driver controller */
   public boolean getDriverRawButton(int i) {
     return driverController.getRawButton(i);
   }
