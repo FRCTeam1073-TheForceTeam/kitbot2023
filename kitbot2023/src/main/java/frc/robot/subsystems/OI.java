@@ -7,21 +7,13 @@ package frc.robot.subsystems;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-//import edu.wpi.first.wpilibj2.command.button.Button;
-//import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 public class OI extends SubsystemBase {
+  // Declares our controller variable
   public static Joystick driverController;
-  private final double LEFT_X_MIN = -1;
-  private final double LEFT_X_MAX = 1;
-  private final double LEFT_Y_MIN = -1;
-  private final double LEFT_Y_MAX = 1;
-  private final double RIGHT_X_MIN = -1;
-  private final double RIGHT_X_MAX = 1;
-  private final double RIGHT_Y_MIN = -1;
-  private final double RIGHT_Y_MAX = 1;
+
+  // Declares the "zero" value variables (which allow us to compensate for joysticks that are a little off)
   private double LEFT_X_ZERO;
   private double LEFT_Y_ZERO;
   private double RIGHT_X_ZERO;
@@ -29,21 +21,21 @@ public class OI extends SubsystemBase {
 
   /** Creates a new OI. */
   public OI() {
+    // Sets the driver controller to a new joystick object at port 0
     driverController = new Joystick(0);
-    LEFT_X_ZERO = 0;
-    LEFT_Y_ZERO = 0;
-    RIGHT_X_ZERO = 0;
-    RIGHT_Y_ZERO = 0;
     zeroDriverController();
-}
+  }
 
+  /** This method will be called once per scheduler run **/
   @Override
   public void periodic() {
-      // This method will be called once per scheduler run
-      SmartDashboard.putBoolean("Button 1", getRawButton(1));
-      SmartDashboard.putBoolean("Button 2", getRawButton(2));
-      SmartDashboard.putNumber("Right Y", getDriverRightY());
-      SmartDashboard.putNumber("Left Y", getDriverLeftY());
+    // Prints our joystick values on SmartDashboard for debugging
+    SmartDashboard.putNumber("Right Y", getDriverRightY());
+    SmartDashboard.putNumber("Right X", getDriverRightX());
+    SmartDashboard.putNumber("Left Y", getDriverLeftY());
+    SmartDashboard.putNumber("Right Y", getDriverRightY());
+
+    // You can add more smartdashboard printouts here for additional joysticks or buttons
   }
 
   public void zeroDriverController() {
@@ -58,24 +50,26 @@ public class OI extends SubsystemBase {
     RIGHT_Y_ZERO = getDriverRightY();
   }
 
+  /** The following methods return quality-controlled values from the driver controller **/
   public double getDriverLeftX() {
-      return MathUtil.clamp(2.0 * (driverController.getRawAxis(0) - (LEFT_X_MAX + LEFT_X_MIN) * 0.5) / (LEFT_X_MAX - LEFT_X_MIN) - LEFT_X_ZERO, -1, 1);
+    // "Clamping" the value makes sure that it's still between 1 and -1 even if we have added an offset to it
+    return MathUtil.clamp(driverController.getRawAxis(0) - LEFT_X_ZERO, -1, 1);
   }
 
   public double getDriverLeftY() {
-      return MathUtil.clamp(2.0 * (driverController.getRawAxis(1) - (LEFT_Y_MAX + LEFT_Y_MIN) * 0.5) / (LEFT_Y_MAX - LEFT_Y_MIN) - LEFT_Y_ZERO, -1, 1);
+    return MathUtil.clamp(driverController.getRawAxis(1) - LEFT_Y_ZERO, -1, 1);
   }
 
   public double getDriverRightX() {
-      return MathUtil.clamp(2.0 * (driverController.getRawAxis(4) - (RIGHT_X_MAX + RIGHT_X_MIN) * 0.5) / (RIGHT_X_MAX - RIGHT_X_MIN) - RIGHT_X_ZERO, -1, 1);
+    return MathUtil.clamp(driverController.getRawAxis(4) - RIGHT_X_ZERO, -1, 1);
   }
 
   public double getDriverRightY() {
-      return MathUtil.clamp(2.0 * (driverController.getRawAxis(5) - (RIGHT_Y_MAX + RIGHT_Y_MIN) * 0.5) / (RIGHT_Y_MAX - RIGHT_Y_MIN) - RIGHT_Y_ZERO, -1, 1);
+    return MathUtil.clamp(driverController.getRawAxis(5) - RIGHT_Y_ZERO, -1, 1);
   }
 
-  public boolean getRawButton(int i)
-  {
+  /** Returns a specified button from the driver controller **/
+  public boolean getDriverRawButton(int i) {
     return driverController.getRawButton(i);
   }
 }
