@@ -25,6 +25,7 @@ public class RobotContainer {
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OI m_OI = new OI();
 
+  // Defines the teleopDriveCommand and having it use the drivetrain and OI
   TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
 
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -32,6 +33,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    // Have the drivetrain take the teleopDriveCommand as the default command
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
     
     // Configure the trigger bindings
