@@ -31,7 +31,7 @@ public class Drivetrain extends SubsystemBase {
   /* Called once per scheduler run */
   @Override
   public void periodic() {
-    // We're not doing anything here so that it doesn't conflict with our commands!
+    // We're not doing anything here to avoid conflicting with our commands!
   }
 
   /* Sets the motors to given speeds for the left and right sides of the robot */
