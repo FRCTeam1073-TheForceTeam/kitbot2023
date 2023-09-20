@@ -19,7 +19,7 @@ public class TeleopDriveCommand extends CommandBase {
     m_OI = m_oi;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(m_drivetrain); //This makes sure that two commands can't try to move the robot in two different directions at once!
+    addRequirements(m_drivetrain);
   }
 
   /* Called when the command is initially scheduled. */
