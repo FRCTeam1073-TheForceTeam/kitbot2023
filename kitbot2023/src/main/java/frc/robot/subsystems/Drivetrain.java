@@ -42,7 +42,7 @@ public class Drivetrain extends SubsystemBase {
     leftMotorLeader.set(-leftPower*.5); // Because the motors are facing in different directions, we reverse the input on one side
     leftMotorFollower.set(-leftPower*.5); // We're also setting them to half speed (comp robots should go fast but test robots don't need to)
     rightMotorLeader.set(rightPower*.5);
-    rightMotorFollower.set(rightPower*5);
+    rightMotorFollower.set(rightPower*.5);
     SmartDashboard.putNumber("Right Power", rightPower); // Prints the values to shuffleboard for debugging
     SmartDashboard.putNumber("Left Power", leftPower);
   }
