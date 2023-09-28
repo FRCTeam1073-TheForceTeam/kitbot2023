@@ -18,7 +18,7 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  private int diagnosticCounter = 0;
   /**
    * This function is run when the robot is first started up and should be used for any
    * initialization code.
@@ -51,7 +51,15 @@ public class Robot extends TimedRobot {
   public void disabledInit() {}
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    if(diagnosticCounter > 0) {
+      m_robotContainer.diagnostics();
+      diagnosticCounter = 0;
+    } else {
+      diagnosticCounter++;
+    }
+    }
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override
@@ -61,6 +69,8 @@ public class Robot extends TimedRobot {
     // schedule the autonomous command (example)
     if (m_autonomousCommand != null) {
       m_autonomousCommand.schedule();
+    } else {
+      System.out.println("No Autonomous Command");
     }
   }
 
