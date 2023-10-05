@@ -28,8 +28,6 @@ public class RobotContainer {
   public RobotContainer() {
     // Sets default commands for each subsystem when they exist
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
-    //m_drivetrain.setDefaultCommand(autoDriveCommand);
-    
     configureBindings();
   }
 
