@@ -31,7 +31,7 @@ import frc.robot.subsystems.Drivetrain;
     counter = counter + 1; 
     // Uses the setPower method from the Drivetrain subsystem
     // Uses percent input from the joysticks which sets the speed [between -1 to 1] to the motors
-    m_drivetrain.setPower(0.25, 0.25);
+    m_drivetrain.setPower(0.6, 0.6);
     SmartDashboard.putNumber("Counter", counter);
   }
 
@@ -39,16 +39,16 @@ import frc.robot.subsystems.Drivetrain;
   @Override
   public void end(boolean interrupted) {
     // Sets motor speeds to 0, so it stops when the command ends
-    m_drivetrain.setPower(0, 0);
+   m_drivetrain.setPower(0, 0);
   }
 
   /* Returns true when the command should end. */
   @Override
   public boolean isFinished() {
-    if (counter >= 200) {
-      return true;
+    if (counter >= 250) {
+    return true;
     } else { 
-      return false;
+    return false;
     }
   
   }}
