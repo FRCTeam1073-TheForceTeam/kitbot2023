@@ -4,9 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.commands.SwoopAuto;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
 
@@ -20,14 +23,27 @@ public class RobotContainer {
   // The robot's subsystems and commands are declared and initialized here.
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OI m_OI = new OI();
+  
   private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
   private final AutoDriveCommand autoDriveCommand = new AutoDriveCommand(m_drivetrain);
+  private final SwoopAuto swoopAuto = new SwoopAuto(m_drivetrain, leftVelocity, rightVelocity, totalRunTime);
+  
+  private final SendableChooser<String> m_chooser = new SendableChooser<>();
+  private static final String kNoAuto = "No Autonomous";
+  private static final String kAutoDriveCommand = "Auto Drive Command";
+  private final String kSwoopAuto = "Swoop Auto";
   // Add new subsystems and commands here, then set their dependencies and add triggers/return commands in autonomous when applicable
 
   /** Creates the container for the robot, which contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     // Sets default commands for each subsystem when they exist
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
+    
+    m_chooser.setDefaultOption("No Autonomous", kNoAuto);
+    m_chooser.addOption("AutoDriveCommand", kAutoDriveCommand);
+    m_chooser.addOption("SwoopAuto", kSwoopAuto);
+
+    SmartDashboard.putData("Auto chooser", m_chooser);
     configureBindings();
   }
 
@@ -38,8 +54,20 @@ public class RobotContainer {
   
   /** Returns the command to run in autonomous */
   public Command getAutonomousCommand() {
+    System.out.println(String.format("Autonomous Command Selected: %s", m_chooser.getSelected()));
+
+    switch(m_chooser.getSelected()){
+      case kNoAuto:
+        return null;
+      case kAutoDriveCommand:
+        return autoDriveCommand;
+      case kSwoopAuto:
+        return swoopAuto;
+     default:
+      System.out.println("No Auto Selected :/");
+      return null;
+    }
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return autoDriveCommand;
   }
 
   public void diagnostics() {
