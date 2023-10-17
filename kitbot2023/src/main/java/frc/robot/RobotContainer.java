@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.commands.SwoopAuto;
@@ -26,7 +27,6 @@ public class RobotContainer {
   
   private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
   private final AutoDriveCommand autoDriveCommand = new AutoDriveCommand(m_drivetrain);
-  private final SwoopAuto swoopAuto = new SwoopAuto(m_drivetrain, leftVelocity, rightVelocity, totalRunTime);
   
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static final String kNoAuto = "No Autonomous";
@@ -62,12 +62,21 @@ public class RobotContainer {
       case kAutoDriveCommand:
         return autoDriveCommand;
       case kSwoopAuto:
-        return swoopAuto;
+        return swerveDriveCommand();
      default:
       System.out.println("No Auto Selected :/");
       return null;
     }
     // return Autos.exampleAuto(m_exampleSubsystem);
+  }
+
+  public Command swerveDriveCommand() {
+    return new SequentialCommandGroup(
+      new SwoopAuto(m_drivetrain, 0.5, 0.0,2),
+      new SwoopAuto(m_drivetrain, 0.0, 0.5, 2),
+      new SwoopAuto(m_drivetrain, 0.5, 0.0,2),
+      new SwoopAuto(m_drivetrain, 0.0, 0.5, 2)
+    );
   }
 
   public void diagnostics() {
