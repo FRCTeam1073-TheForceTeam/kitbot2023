@@ -45,5 +45,6 @@ public class Drivetrain extends SubsystemBase {
     rightMotorFollower.set(rightPower*.5);
     SmartDashboard.putNumber("Right Power", rightPower); // Prints the values to shuffleboard for debugging
     SmartDashboard.putNumber("Left Power", leftPower);
+    
   }
 }
