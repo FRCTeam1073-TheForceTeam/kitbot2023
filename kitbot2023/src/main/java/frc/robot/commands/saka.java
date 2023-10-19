@@ -5,24 +5,45 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.subsystems.Drivetrain;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-public class saka extends CommandBase {
-  /** Creates a new saka. */
-  public saka(Drivetrain,drivetrain) {
+
+public class Saka extends CommandBase {
+  private Drivetrain m_drivetrain;
+  private final Timer m_timer = new Timer();
+
+  int counter;
+  /** Creates a new Saka. */
+  public Saka(Drivetrain drivetrain) {
     m_drivetrain = drivetrain;
 
     // Use addRequirements() here to declare subsystem dependencies.
-    addReq  
+    addRequirements(m_drivetrain); //This makes sure that two commands can't try to move the robot in two different directions at once!
   }
 
 
   // Called when the command is initially scheduled.
   @Override
-  public void initialize() {}
+  public void initialize() {
+    counter = 0;
+  }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    counter++;
+    // Uses the setPower method from the Drivetrain subsystem
+    // Uses percent input from the joysticks which sets the speed [between -1 to 1] to the motors
+    if (m_timer.get() < 3.0) {
+      m_drivetrain.setPower(0.6, 0.6);
+    }
+    
+    //m_drivetrain.setPower(leftPower:0.6, rightPower:0.6);
+
+  SmartDashboard.putNumber("Counter", counter);
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -31,6 +52,10 @@ public class saka extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    if (counter >= 250) {
+      return true;
+      } else { 
+      return false;
+      }
   }
 }
