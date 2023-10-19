@@ -72,10 +72,10 @@ public class RobotContainer {
 
   public Command swerveDriveCommand() {
     return new SequentialCommandGroup(
-      new SwoopAuto(m_drivetrain, 0.5, 0.0,2),
-      new SwoopAuto(m_drivetrain, 0.0, 0.5, 2),
-      new SwoopAuto(m_drivetrain, 0.5, 0.0,2),
-      new SwoopAuto(m_drivetrain, 0.0, 0.5, 2)
+      new SwoopAuto(m_drivetrain, -0.5, 0.0,2),
+      new SwoopAuto(m_drivetrain, 0.0, -0.5, 2),
+      new SwoopAuto(m_drivetrain, -0.5, 0.0,2),
+      new SwoopAuto(m_drivetrain, 0.0, -0.5, 2)
     );
   }
 
