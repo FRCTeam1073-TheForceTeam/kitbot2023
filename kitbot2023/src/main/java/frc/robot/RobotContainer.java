@@ -13,8 +13,10 @@ import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.commands.SwoopAuto;
+import frc.robot.commands.BlingCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
+import frc.robot.subsystems.Bling;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -26,9 +28,11 @@ public class RobotContainer {
   // The robot's subsystems and commands are declared and initialized here.
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OI m_OI = new OI();
-  
+  private final Bling m_bling = new Bling();
+
   private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
   private final AutoDriveCommand autoDriveCommand = new AutoDriveCommand(m_drivetrain);
+  private final BlingCommand blingCommand = new BlingCommand(m_bling, m_OI);
   
   private final SendableChooser<String> m_chooser = new SendableChooser<>();
   private static final String kNoAuto = "No Autonomous";
