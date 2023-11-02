@@ -7,7 +7,9 @@ package frc.robot;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.commands.SwoopAuto;
@@ -32,6 +34,7 @@ public class RobotContainer {
   private static final String kNoAuto = "No Autonomous";
   private static final String kAutoDriveCommand = "Auto Drive Command";
   private final String kSwoopAuto = "Swoop Auto";
+  private final String kSeqParaAuto = "Sequential + Parallel";
   // Add new subsystems and commands here, then set their dependencies and add triggers/return commands in autonomous when applicable
 
   /** Creates the container for the robot, which contains subsystems, OI devices, and commands. */
@@ -42,6 +45,7 @@ public class RobotContainer {
     m_chooser.setDefaultOption("No Autonomous", kNoAuto);
     m_chooser.addOption("AutoDriveCommand", kAutoDriveCommand);
     m_chooser.addOption("SwoopAuto", kSwoopAuto);
+    m_chooser.addOption("SeqParaAuto", kSeqParaAuto);
 
     SmartDashboard.putData("Auto chooser", m_chooser);
     configureBindings();
@@ -63,6 +67,8 @@ public class RobotContainer {
         return autoDriveCommand;
       case kSwoopAuto:
         return swerveDriveCommand();
+      case kSeqParaAuto:
+        return seqParaDriveCommand();
      default:
       System.out.println("No Auto Selected :/");
       return null;
@@ -78,6 +84,16 @@ public class RobotContainer {
       new SwoopAuto(m_drivetrain, 0.0, -0.5, 2)
     );
   }
+
+    public Command seqParaDriveCommand() {
+      return new SequentialCommandGroup(
+        new SwoopAuto(m_drivetrain, -0.5, 0.0,2),
+        new ParallelCommandGroup(new WaitCommand(8.0), new SwoopAuto(m_drivetrain, 0.0, -0.5, 2)), 
+        new SwoopAuto(m_drivetrain, -0.5, 0.0,2),
+        new SwoopAuto(m_drivetrain, 0.0, -0.5, 2)
+      );
+    }
+  
 
   public void diagnostics() {
   }
