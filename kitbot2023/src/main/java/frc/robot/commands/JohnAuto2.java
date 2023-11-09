@@ -8,7 +8,7 @@ import frc.robot.subsystems.Drivetrain;
 
 public class JohnAuto2 extends CommandBase {
   int counter;
-Drivetrain m_drivetrain;
+  Drivetrain m_drivetrain;
 
   /** Creates a new JohnAuto2. */
   public JohnAuto2(Drivetrain drivetrain) {
@@ -28,26 +28,23 @@ Drivetrain m_drivetrain;
     counter = counter + 1;
     // Uses set power method from the Drivetrain subsystem
     // Uses percent input from the joysticks which sets the speed [between -1 to 1] to the motors
-    m_drivetrain.setPower( -0.6, 0.6);
+    m_drivetrain.setPower(-0.6, 0.6);
   }
-// Called once the command ends or is interrupted.
-@Override
-public void end(boolean interrupted) {
-// Sets motor speeds to 0, so it stops when the command ends
-m_drivetrain.setPower(0, 0);
-}
-
-// Returns true when the command should end.
-@Override
-public boolean isFinished() {
- if (counter >= 250) 
- {
-  return true;
- }
-  {
-  return false;
-}
-} 
-}
   // Called once the command ends or is interrupted.
+  @Override
+  public void end(boolean interrupted) {
+    // Sets motor speeds to 0, so it stops when the command ends
+    m_drivetrain.setPower(0, 0);
+  }
+
+  // Returns true when the command should end.
+  @Override
+  public boolean isFinished() {
+  if (counter >= 250) 
+  {
+    return true;
+  }
+  return false;
+  } 
+}
   

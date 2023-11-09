@@ -5,8 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.AutoDriveCommand;
-import frc.robot.commands.JohnAuto2;
+import frc.robot.commands.JohnAuto;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
@@ -23,7 +24,7 @@ public class RobotContainer {
   private final OI m_OI = new OI();
   private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
   private final AutoDriveCommand autoDriveCommand = new AutoDriveCommand(m_drivetrain);
-  private final JohnAuto2 auto2 = new JohnAuto2(m_drivetrain);
+  // private final JohnAuto auto2 = new JohnAuto(m_drivetrain, double leftOi, double right );
   // Add new subsystems and commands here, then set their dependencies and add triggers/return commands in autonomous when applicable
 
   /** Creates the container for the robot, which contains subsystems, OI devices, and commands. */
@@ -41,8 +42,18 @@ public class RobotContainer {
   /** Returns the command to run in autonomous */
   public Command getAutonomousCommand() {
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return auto2;
+    return sequentialCommand();
   }
+
+public Command sequentialCommand()
+{
+  return new SequentialCommandGroup(
+    new JohnAuto(m_drivetrain, -0.3, 0.3),
+    new JohnAuto(m_drivetrain, 0.4, -0.4),
+    new JohnAuto(m_drivetrain, -0.5, 0.5),
+    new JohnAuto(m_drivetrain, 0.6, -0.6)
+  );
+}
 
   public void diagnostics() {
   }

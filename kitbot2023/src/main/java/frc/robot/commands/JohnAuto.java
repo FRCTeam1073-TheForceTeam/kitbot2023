@@ -10,11 +10,15 @@ import frc.robot.subsystems.Drivetrain;
 public class JohnAuto extends CommandBase {
   int counter;
   Drivetrain m_drivetrain;
+  double leftPower;
+  double rightPower;
 
   /** Creates a new JohnAuto. */
-  public JohnAuto(Drivetrain drivetrain) {
+  public JohnAuto(Drivetrain drivetrain, double left, double right) {
     // Use addRequirements(m_drivetrain); here to declare subsystem dependencies.
     m_drivetrain = drivetrain;
+    leftPower = left;
+    rightPower = right;
   }
 
   // Called when the command is initially scheduled.
@@ -30,7 +34,7 @@ public class JohnAuto extends CommandBase {
     counter = counter + 1;
     // Uses set power method from the Drivetrain subsystem
     // Uses percent input from the joysticks which sets the speed [between -1 to 1] to the motors
-    m_drivetrain.setPower( 0.6, 0.6);
+    m_drivetrain.setPower( leftPower,rightPower);
   }
 
   // Called once the command ends or is interrupted.
@@ -43,7 +47,7 @@ public class JohnAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   if (counter >= 250) 
+   if (counter >= 50) 
    {
     return true;
    }
