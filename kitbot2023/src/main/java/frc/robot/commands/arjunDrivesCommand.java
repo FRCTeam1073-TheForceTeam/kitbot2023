@@ -8,12 +8,12 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
 
-public class arjunDrivesCommand extends CommandBase {
+public class ArjunDrivesCommand extends CommandBase {
   private Drivetrain m_drivetrain;
   private int counter; 
 
   /** Creates a new arjunDrivesCommand. */
-  public arjunDrivesCommand(Drivetrain drivetrain) {
+  public ArjunDrivesCommand(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
@@ -30,9 +30,8 @@ public class arjunDrivesCommand extends CommandBase {
   @Override
   public void execute() {
     counter ++;
-    m_drivetrain.setPower(0.5, 0.3);
+    m_drivetrain.setPower(0.5, 0.5);
   }
-
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
@@ -42,7 +41,7 @@ public class arjunDrivesCommand extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (counter >= 350)
+    if (counter >= 50)
     {
       return true;
     }
