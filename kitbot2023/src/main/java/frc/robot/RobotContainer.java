@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.commands.Saka;
+import frc.robot.commands.Saka2;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
@@ -37,7 +38,7 @@ public class RobotContainer {
   /** Returns the command to run in autonomous */
   public Command getAutonomousCommand() {
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return sequentialCommand();
+    return  new Saka2(m_drivetrain);
   }
   public Command sequentialCommand()
   {
