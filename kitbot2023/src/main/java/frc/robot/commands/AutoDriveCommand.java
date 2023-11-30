@@ -8,9 +8,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Drivetrain;
 
-  public class AutoDriveCommand extends CommandBase {
+public class AutoDriveCommand extends CommandBase {
   private Drivetrain m_drivetrain;
   int counter;
+  
   /** Creates a new TeleopDriveCommand. */
   public AutoDriveCommand(Drivetrain drivetrain) {
     // Initializes drivetrain and OI (they're set to the inputs in the parameters)

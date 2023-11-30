@@ -19,6 +19,7 @@ public class JohnAuto extends CommandBase {
     m_drivetrain = drivetrain;
     leftPower = left;
     rightPower = right;
+    addRequirements(m_drivetrain);
   }
 
   // Called when the command is initially scheduled.
@@ -47,7 +48,7 @@ public class JohnAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-   if (counter >= 50) 
+   if (counter >= 100) 
    {
     return true;
    }
