@@ -5,7 +5,9 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.ArjunDrivesCommand;
 import frc.robot.commands.AutoDriveCommand;
 import frc.robot.commands.TeleopDriveCommand;
@@ -42,7 +44,7 @@ public class RobotContainer {
   /** Returns the command to run in autonomous */
   public Command getAutonomousCommand() {
     // return Autos.exampleAuto(m_exampleSubsystem);
-    return seqCommand();
+    return parCommand();
   }
 
   public Command seqCommand() {
@@ -52,6 +54,9 @@ public class RobotContainer {
       new ArjunDrivesCommand(m_drivetrain)
     );
   }
+ public Command parCommand() {
+  return new ParallelCommandGroup(new ArjunDrivesCommand(m_drivetrain), new WaitCommand(7.5)); 
+ }
 
 
   public void diagnostics() {

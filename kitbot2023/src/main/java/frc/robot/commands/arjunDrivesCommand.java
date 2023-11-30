@@ -12,7 +12,7 @@ public class ArjunDrivesCommand extends CommandBase {
   private Drivetrain m_drivetrain;
   private int counter; 
 
-  /** Creates a new arjunDrivesCommand. */
+  /** Creates a new arjunDrivesCommand. */ 
   public ArjunDrivesCommand(Drivetrain drivetrain) {
     // Use addRequirements() here to declare subsystem dependencies.
     m_drivetrain = drivetrain;
