@@ -12,10 +12,11 @@ public class LeftWheelSpin extends CommandBase {
   private Drivetrain m_drivetrain;
   private int counter;
   private double timer;
-  
+  private double speed;
   /** Creates a new Vittorio. */
-  public LeftWheelSpin(Drivetrain drivetrain) {
+  public LeftWheelSpin(Drivetrain drivetrain, double m_speed) {
     m_drivetrain = drivetrain;
+    speed = m_speed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(m_drivetrain);
   }
@@ -29,7 +30,7 @@ public class LeftWheelSpin extends CommandBase {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drivetrain.setPower(0,0.5);
+    m_drivetrain.setPower(0,speed);
     if (counter == 0) {
       timer = Timer.getFPGATimestamp();
     }

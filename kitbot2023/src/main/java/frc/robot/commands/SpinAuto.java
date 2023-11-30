@@ -23,13 +23,14 @@ public class SpinAuto extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_drivetrain.setPower(-.5,.5);
+
     counter = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
+    m_drivetrain.setPower(-.7,.7);
     if (counter == 0) {
       timer = Timer.getFPGATimestamp();
     }
@@ -44,7 +45,7 @@ public class SpinAuto extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    if (timer + 5.0 > Timer.getFPGATimestamp())
+    if (timer > 5.0)
     {
       return true;
     }

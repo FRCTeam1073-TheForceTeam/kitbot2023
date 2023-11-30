@@ -8,6 +8,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
+import frc.robot.commands.LeftWheelSpin;
+import frc.robot.commands.RightWheelSpin;
 import frc.robot.commands.SpinAuto;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.commands.Vittorio;
@@ -49,33 +52,28 @@ public class RobotContainer {
     // To learn more about trigger bindings, visit https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html#trigger-bindings
   }
   
-  /** Returns the command to run in autonomous */
-  public Command getAutonomousCommand() {
-    switch (m_chooser.getSelected()) {
-      case kNoAuto:
-        return null;
-      case kAutoCommand:
-        return autoCommand;
-      case kSpinAuto:
-      return spinAuto;
-
-    }
-    // return Autos.exampleAuto(m_exampleSubsystem);
-    return autoCommand;
+/**delete this?? */
+ public Command parallelCommandTest(
+  double speed)
+  {
+    return new ParallelCommandGroup(
+      new WaitCommand(3),
+    new RightWheelSpin(m_drivetrain, speed)
+    );
   }
 
-  public Command SequentialCommand() {
+  public Command sequentialTest() {
     return new SequentialCommandGroup(
       new SpinAuto(m_drivetrain),
       new Vittorio(m_drivetrain),
       new Vittorio (m_drivetrain),
       new SpinAuto(m_drivetrain)
     );
-
+  
   }
-  public Command ParallelCommandGroup() {
-    return new ParallelCommandGroup();
-
+   /** Returns the command to run in autonomous */
+  public Command getAutonomousCommand() {
+    return sequentialTest();
 
   }
 }
