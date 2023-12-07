@@ -72,4 +72,14 @@ public class OI extends SubsystemBase {
   public boolean getDriverRawButton(int i) {
     return driverController.getRawButton(i);
   }
+  public double getDriverRightTrigger() {
+    return driverController.getRawAxis(3);
+  }
+  public double getDriverLeftTrigger() {
+    return driverController.getRawAxis(2);
+  }
+
+  public boolean getDriverTriggerRight(int i) {
+    return false;
+  }
 }

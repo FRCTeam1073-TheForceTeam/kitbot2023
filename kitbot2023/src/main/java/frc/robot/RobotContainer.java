@@ -11,12 +11,12 @@ import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.commands.AutoDriveCommand;
-import frc.robot.commands.TeleopDriveCommand;
-import frc.robot.commands.SwoopAuto;
 import frc.robot.commands.BlingCommand;
+import frc.robot.commands.SwoopAuto;
+import frc.robot.commands.TeleopDriveCommand;
+import frc.robot.subsystems.Bling;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
-import frc.robot.subsystems.Bling;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -45,7 +45,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Sets default commands for each subsystem when they exist
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
-    
+    m_bling.setDefaultCommand(blingCommand);
     m_chooser.setDefaultOption("No Autonomous", kNoAuto);
     m_chooser.addOption("AutoDriveCommand", kAutoDriveCommand);
     m_chooser.addOption("SwoopAuto", kSwoopAuto);
