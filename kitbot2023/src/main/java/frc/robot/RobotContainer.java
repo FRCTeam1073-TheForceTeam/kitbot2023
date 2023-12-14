@@ -30,7 +30,7 @@ public class RobotContainer {
   private final OI m_OI = new OI();
   private final Bling m_bling = new Bling();
 
-  private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
+  private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI, m_bling);
   private final AutoDriveCommand autoDriveCommand = new AutoDriveCommand(m_drivetrain);
   private final BlingCommand blingCommand = new BlingCommand(m_bling, m_OI);
   
@@ -45,7 +45,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Sets default commands for each subsystem when they exist
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
-    m_bling.setDefaultCommand(blingCommand);
+    // m_bling.setDefaultCommand(blingCommand);
     m_chooser.setDefaultOption("No Autonomous", kNoAuto);
     m_chooser.addOption("AutoDriveCommand", kAutoDriveCommand);
     m_chooser.addOption("SwoopAuto", kSwoopAuto);

@@ -23,9 +23,9 @@ public class BlingCommand extends CommandBase {
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    for(int i = 0; i < 8; i++){
-      bling.setRGB(i, 177, 204, 157);
-    }
+    // for(int i = 0; i < 8; i++){
+    //   bling.setRGB(i, 177, 204, 157);
+    // }
     
   }
  /*  Red: 15, 0, 0
@@ -56,12 +56,12 @@ public class BlingCommand extends CommandBase {
      else if(oi.getDriverRawButton(4)){
        bling.setRGBAll(0, 15, 0);
      }
-    //  else if(oi.getDriverRawButton(5)){
-    //    bling.setRGBAll(0, 0, 5);
-    //  }
-    //  else if(oi.getDriverRawButton(6)){
-    //    bling.setRGBAll(9, 2, 6);
-    // }
+     else if(oi.getDriverRawButton(5)){
+       bling.setRGBAll(0, 0, 5);
+     }
+     else if(oi.getDriverRawButton(6)){
+       bling.setRGBAll(9, 2, 6);
+    }
   }
 
   // private void setRainbowALL() {
