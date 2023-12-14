@@ -54,8 +54,6 @@ public class TeleopDriveCommand extends CommandBase {
     if(OI.driverController.getRawButtonPressed(4)) {
       m_bling.setRGBAll(0, 0, 0);
     }
-
-    m_bling.setRGBAll(ledR, ledG, ledB);
   }
 
   /* Called once the command ends or is interrupted. */
