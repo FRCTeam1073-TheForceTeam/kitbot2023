@@ -4,10 +4,12 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.TeleopDriveCommand;
 import frc.robot.subsystems.Drivetrain;
 import frc.robot.subsystems.OI;
+import frc.robot.subsystems.Shooter;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -19,6 +21,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are declared and initialized here.
   private final Drivetrain m_drivetrain = new Drivetrain();
   private final OI m_OI = new OI();
+  private final Shooter m_shooter = new Shooter();
   private final TeleopDriveCommand teleopDriveCommand = new TeleopDriveCommand(m_drivetrain, m_OI);
   // Add new subsystems and commands here, then set their dependencies and add triggers/return commands in autonomous when applicable
 
@@ -26,6 +29,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Sets default commands for each subsystem when they exist
     m_drivetrain.setDefaultCommand(teleopDriveCommand);
+    SmartDashboard.putData(m_shooter);
     
     configureBindings();
   }
