@@ -87,6 +87,16 @@ public class Shooter extends SubsystemBase
     this.offset = offset;
   }
   
+  public double getTopSpeed()
+  {
+    return topMotor.getRotorVelocity().getValueAsDouble();
+  }
+
+  public double getBottomSpeed()
+  {
+    return bottomMotor.getRotorVelocity().getValueAsDouble();
+  }
+
   public double getSpeed()
   {
     return speed;
@@ -126,6 +136,8 @@ public class Shooter extends SubsystemBase
   {
     builder.setSmartDashboardType("Shooter");
     builder.addDoubleProperty("Speed", this::getSpeed, this::setSpeed);
+    builder.addDoubleProperty("Top Speed", this::getTopSpeed, null);
+    builder.addDoubleProperty("Bottom Speed", this::getBottomSpeed, null);
     builder.addDoubleProperty("Offset", this::getOffset, this::setOffset);
     builder.addDoubleProperty("p", this::getP, this::setP);
     builder.addDoubleProperty("i", this::getI, this::setI);
