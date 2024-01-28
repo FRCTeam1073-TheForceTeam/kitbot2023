@@ -9,6 +9,7 @@ import com.ctre.phoenix6.controls.MotionMagicVelocityVoltage;
 import com.ctre.phoenix6.controls.VelocityVoltage;
 import com.ctre.phoenix6.hardware.TalonFX;
 import com.ctre.phoenix6.signals.ControlModeValue;
+import com.ctre.phoenix6.signals.NeutralModeValue;
 
 import edu.wpi.first.util.sendable.SendableBuilder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -53,7 +54,9 @@ public class Shooter extends SubsystemBase
     configs.TorqueCurrent.PeakReverseTorqueCurrent = -40;
 
     topMotor.getConfigurator().apply(configs);
+    topMotor.setNeutralMode(NeutralModeValue.Coast);
     bottomMotor.getConfigurator().apply(configs);
+    bottomMotor.setNeutralMode(NeutralModeValue.Coast);
   }
 
   public void setTopMotorSpeed(double speed)
@@ -73,7 +76,7 @@ public class Shooter extends SubsystemBase
 
   public void setMotorSpeeds(double speed, double offset)
   {
-    setTopMotorSpeed(speed);
+    setTopMotorSpeed(-speed);
     setBottomMotorSpeed(speed + offset);
   }
 
