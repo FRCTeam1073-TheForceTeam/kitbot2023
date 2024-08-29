@@ -6,11 +6,11 @@ package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.Drivetrain;
 
 
-  public class SwoopAuto extends CommandBase {
+  public class SwoopAuto extends Command {
   private Drivetrain m_drivetrain;
   private double leftVelocity;
   private double rightVelocity;
